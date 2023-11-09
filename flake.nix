@@ -2,22 +2,27 @@
   description = "My Nix packages";
 
   inputs = {
-    nixpkgs.url = "github:nixos/nixpkgs/nixos-22.11";
-    unstable.url = "github:nixos/nixpkgs";
+    nixpkgs.url = "https://flakehub.com/f/NixOS/nixpkgs/0.1.*.tar.gz";
 
-    snowfall = {
-      url = "github:snowfallorg/lib/dev";
+    andromeda = {
+      url = "https://flakehub.com/f/milkyway-org/andromeda-lib/0.1.*.tar.gz";
       inputs.nixpkgs.follows = "nixpkgs";
     };
   };
 
-  outputs = inputs:
-    inputs.snowfall.mkFlake {
+  outputs = inputs @ {andromeda, ...}:
+    andromeda.lib.mkFlake {
       inherit inputs;
       src = ./.;
 
-      overlay-package-namespace = "plusultra";
-
       alias.packages.default = "tmux";
+
+      andromeda = {
+        namespace = "milkyway";
+        meta = {
+          name = "milkyway";
+          title = "MilkyWay Galaxy";
+        };
+      };
     };
 }
