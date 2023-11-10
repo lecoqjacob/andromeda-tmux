@@ -15,17 +15,33 @@
 set -g default-terminal "screen-256color"
 
 setw -g xterm-keys on
-set -s escape-time 10                     # faster command sequences
-set -sg repeat-time 600                   # increase repeat timeout
+set -s escape-time 10   # faster command sequences
+set -sg repeat-time 600 # increase repeat timeout
 set -s focus-events on
 
-set -g prefix2 C-a                        # GNU-Screen compatible prefix
+# GNU-Screen compatible prefix
+set -g prefix2 C-a
 bind C-a send-prefix -2
 
-set -q -g status-utf8 on                  # expect UTF-8 (tmux < 2.2)
+# expect UTF-8 (tmux < 2.2)
+set -q -g status-utf8 on
 setw -q -g utf8 on
 
-set -g history-limit 5000                 # boost history
+# boost history
+set -g history-limit 5000
+
+# Fix colors being wrong in programs like Neovim.
+set-option -ga terminal-overrides ",xterm-256color:Tc"
+
+# Expand the left status to accomodate longer session names.
+set-option -g status-left-length 100
+set-option -g status-right-length 100
+
+# Use 24 hour clock.
+setw -g clock-mode-style 24
+
+# Aggressively resize.
+setw -g aggressive-resize on
 
 # edit configuration
 bind e new-window -n "#{TMUX_CONF_LOCAL}" sh -c '${EDITOR:-vim} "$TMUX_CONF_LOCAL" && "$TMUX_PROGRAM" ${TMUX_SOCKET:+-S "$TMUX_SOCKET"} source "$TMUX_CONF" \; display "$TMUX_CONF_LOCAL sourced"'
