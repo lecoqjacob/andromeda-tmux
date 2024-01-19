@@ -29,7 +29,7 @@ You can try this configuration out without committing to installing it on your s
 the following command.
 
 ```nix
-nix run github:jakehamilton/tmux
+nix run github:n16hth4wkk/andromeda-tmux
 ```
 
 ## Install
@@ -39,7 +39,7 @@ nix run github:jakehamilton/tmux
 You can install this package imperatively with the following command.
 
 ```nix
-nix profile install github:jakehamilton/tmux
+nix profile install github:n16hth4wkk/andromeda-tmux
 ```
 
 ### Nix Configuration
@@ -60,7 +60,7 @@ You can install this package by adding it as an input to your Nix flake.
 		};
 
 		tmux = {
-			url = "github:jakehamilton/tmux";
+			url = "github:n16hth4wkk/andromeda-tmux";
 			inputs.nixpkgs.follows = "nixpkgs";
 		};
 	};
@@ -143,7 +143,7 @@ following example for how to create your own derivation.
 		};
 
 		tmux = {
-			url = "github:jakehamilton/tmux";
+			url = "github:n16hth4wkk/andromeda-tmux";
 			inputs.nixpkgs.follows = "nixpkgs";
 		};
 	};
